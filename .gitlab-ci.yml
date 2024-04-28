@@ -1,0 +1,95 @@
+stages: # 要执行的步骤
+  - build-dev
+  - deploy-dev
+  - build-uat
+  - deploy-uat
+  - build-prod
+  - deploy-prod
+before_script:
+  - docker login -u admin -p Harbor12345 kharbor.'A'.com
+
+
+build-dev: # 步骤 build
+  stage: build-dev
+  script:
+    - npm config set registry http://192.168.8.21:8081/repository/group-npm/
+    - yarn config set ignore-engines true
+    - yarn
+    - yarn build
+#    - npm install
+#    - npm run build
+    - docker build -t kharbor.'A'.com/bi/vite-dev:latest .
+    - docker push kharbor.'A'.com/bi/vite-dev:latest
+  only:
+    - dev # 当提交到dev分支或tags时才触发此build命令
+    - tags
+  tags:
+    - vue-dev # 由shell执行
+deploy-dev:
+  stage: deploy-dev
+  script:
+#    - docker pull kharbor.'A'.com/bi/vite-dev:latest
+    - docker stack deploy -c docker-compose-dev.yml eureka
+  only:
+    - dev # 当提交到dev分支或tags时才触发此build命令
+    - tags
+  tags:
+    - vue-dev # 由shell执行
+    
+
+build-uat: # 步骤 build
+  stage: build-uat
+  script:
+    # - rm -rf package-lock.json
+    - npm config set registry http://192.168.8.21:8081/repository/group-npm/
+    # - yarn config set ignore-engines true
+    # - yarn
+    # - yarn build:uat
+    - npm install
+    - npm run build:uat
+    - docker build -t kharbor.'A'.com/bi/vite:latest .
+    - docker push kharbor.'A'.com/bi/vite:latest
+  only:
+    - uat # 当提交到master分支或tags时才触发此build命令
+    - tags
+  tags:
+    - vue-uat # 由shell执行
+deploy-uat:
+  stage: deploy-uat
+  script:
+    - docker stack deploy -c docker-compose-uat.yml eureka
+  only:
+    - uat # 当提交到master分支或tags时才触发此build命令
+    - tags
+  tags:
+    - vue-uat
+
+
+build-prod: # 步骤 build
+  stage: build-prod
+  script:
+    # - rm -rf node_modules/
+    # - rm -rf package-lock.json
+    - npm config set registry http://192.168.8.21:8081/repository/group-npm/
+    - yarn config set ignore-engines true
+    - yarn
+    - yarn build:prod
+#    - npm install
+#    - npm run build:prod
+    - docker build -t kharbor.'A'.com/bi/vite-prod:latest .
+    - docker push kharbor.'A'.com/bi/vite-prod:latest
+  only:
+    - prod # 当提交到dev分支或tags时才触发此build命令
+    - tags
+  tags:
+    - vue-prod # 由shell执行
+deploy-prod:
+  stage: deploy-prod
+  script:
+    - docker stack deploy -c docker-compose-prod.yml eureka
+  only:
+    - prod # 当提交到dev分支或tags时才触发此build命令
+    - tags
+  tags:
+    - vue-prod # 由shell执行
+
