@@ -1,8 +1,8 @@
 <!--
  * @Description: 
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2023-05-11 09:44:13
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-29 16:04:46
 -->
 <template>
@@ -86,7 +86,7 @@ import {
   apiGetTreePartsDataUnit,
   apiGetCardDataUnit,
   getLinearDataUnit,
-} from "@/api/home";
+} from "@/mock/home";
 import { getMenuByRight } from "@/api";
 import { updataCurrentAndSelectPartInfoHook } from "./components/partSelectCp/partSelectHook";
 import { TourShowHook } from "./hooks/tourShowHook";

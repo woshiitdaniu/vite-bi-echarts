@@ -1,8 +1,8 @@
 /*
  * @Description:
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2022-12-12 10:56:39
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-29 16:00:08
  */
 import axios from "axios";

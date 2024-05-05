@@ -1,8 +1,8 @@
 /*
  * @Description:
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2022-12-13 09:25:59
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2022-12-13 09:31:11
  */
 // 750设计稿  量到多少就除于50 就转成了rem

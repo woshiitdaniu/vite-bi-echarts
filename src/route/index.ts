@@ -1,8 +1,8 @@
 /*
  * @Description:
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2022-12-12 10:30:42
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2022-12-12 10:46:42
  */
 import { createRouter, createWebHashHistory } from "vue-router";

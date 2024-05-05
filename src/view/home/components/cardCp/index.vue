@@ -1,8 +1,8 @@
 <!--
  * @Description: 内容卡片  包括title 总体数据  折线图 收入构成表格等
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-26 10:48:36
 -->
 <template>

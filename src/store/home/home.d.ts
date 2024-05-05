@@ -1,8 +1,8 @@
 /*
  * @Description:
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2024-04-25 13:59:06
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-25 14:07:51
  */
 export interface inf_currentPartInfo {

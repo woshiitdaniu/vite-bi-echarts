@@ -1,8 +1,8 @@
 /*
  * @Description:
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2022-12-12 10:43:49
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-29 16:05:18
  */
 import { Router } from "vue-router";

@@ -1,15 +1,15 @@
 <!--
  * @Description: 
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2024-04-23 09:40:50
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-29 11:18:31
 -->
 <!--
  * @Description: 顶部标题左侧的部门切换组件
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-26 15:40:45
 -->
 <template>

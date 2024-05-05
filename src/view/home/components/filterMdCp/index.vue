@@ -1,8 +1,8 @@
 <!--
  * @Description: 筛选条件 自顶往下滑出的自定义弹框
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-29 10:53:35
 -->
 <template>

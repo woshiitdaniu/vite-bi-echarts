@@ -1,8 +1,8 @@
 <!--
  * @Description: 
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2022-12-12 09:48:36
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-23 10:44:38
 -->
 <script setup lang="ts"></script>

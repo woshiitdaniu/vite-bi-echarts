@@ -1,8 +1,8 @@
 <!--
  * @Description: 收入构成tablet
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-29 11:07:45
 -->
 <template>

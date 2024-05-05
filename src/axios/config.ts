@@ -1,8 +1,8 @@
 /*
  * @Description: 
- * @Autor: Bingo
+ * @Autor: bg
  * @Date: 2022-12-12 10:56:56
- * @LastEditors: Bingo
+ * @LastEditors: bg
  * @LastEditTime: 2024-04-28 09:45:34
  */
 export const AXIOS_DEFALUT_CONF = {
