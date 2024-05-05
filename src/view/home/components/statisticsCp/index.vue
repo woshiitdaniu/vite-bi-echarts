@@ -1,9 +1,9 @@
 <!--
  * @Description: 月度 季度 年度 同比数据
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-26 10:54:09
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 11:08:49
 -->
 <template>
   <div class="statisticsCp-box">
@@ -32,7 +32,7 @@
       <span class="statistics-item-next"
         >同比 {{ props.cardData.monthYearOnYearBasis || "---" }}</span
       >
-      <span class="statistics-item-rate"
+      <span class="statistics-item-rate" :class="oration(props.cardData.monthChain)?'down-color':'up-color'"
         >{{ props.cardData.monthChain || "---" }}
         <img
           :src="handleImg(props.cardData.monthChain)"
@@ -49,7 +49,7 @@
           <span class="statistics-item-next">同比 {{
             props.cardData.monthYearOnYearBasis || "---"
           }}</span>
-          <span class="statistics-item-rate"
+          <span class="statistics-item-rate" :class="oration(props.cardData.monthChain)?'down-color':'up-color'"
             >{{ props.cardData.monthChain || "---" }}
             <img
               :src="handleImg(props.cardData.monthChain)"
@@ -61,7 +61,7 @@
           <span class="statistics-item-next"
             >环比 {{ props.cardData.monthYearOnYearBasis || "---" }}</span
           >
-          <span class="statistics-item-rate"
+          <span class="statistics-item-rate" :class="oration(props.cardData.monthChain)?'down-color':'up-color'"
             >{{ props.cardData.monthChain || "---" }}
             <img
               :src="handleImg(props.cardData.monthChain)"
@@ -89,7 +89,7 @@
       <span class="statistics-item-next"
         >同比 {{ props.cardData.quarterYearOnYearBasis || "---" }}</span
       >
-      <span class="statistics-item-rate"
+      <span class="statistics-item-rate" :class="oration(props.cardData.quarterChain)?'down-color':'up-color'"
         >{{ props.cardData.quarterChain || "---" }}
         <img
           :src="handleImg(props.cardData.quarterChain)"
@@ -114,7 +114,7 @@
       <span class="statistics-item-next"
         >同比 {{ props.cardData.yearOnYearBasis || "---" }}</span
       >
-      <span class="statistics-item-rate"
+      <span class="statistics-item-rate" :class="oration(props.cardData.yearChain)?'down-color':'up-color'"
         >{{ props.cardData.yearChain || "---" }}
         <img
           :src="handleImg(props.cardData.yearChain)"
@@ -124,8 +124,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
-import { handleImg } from "@/utils/common.ts";
+import { handleImg,oration } from "@/utils/common.ts";
 import { TARGET_TYPE } from "@/config/const";
 
 const props = defineProps(["cardData"]);
@@ -161,7 +160,7 @@ const props = defineProps(["cardData"]);
     align-items: center;
   }
   &-icon {
-    width: 0.16rem;
+    width: .28rem;
     height: 0.24rem;
     margin-left: 0.12rem;
   }
@@ -192,7 +191,7 @@ const props = defineProps(["cardData"]);
 }
 
 .statistics-item-title {
-  font-size: 13px;
+  font-size: 0.26rem;
   font-weight: 400;
   color: #696666;
 }

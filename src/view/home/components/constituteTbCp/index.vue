@@ -1,9 +1,9 @@
 <!--
  * @Description: 收入构成tablet
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-26 10:44:15
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 11:07:45
 -->
 <template>
   <div class="constituteTbCp-box" v-if="showConstituteTbCp">
@@ -26,7 +26,7 @@
       }}</span
       ><span class="constituteTbCp-data-last"
         >同比 {{ item.showYearOnYearBasis }}</span
-      ><span class="constituteTbCp-data-rate">
+      ><span class="constituteTbCp-data-rate" :class="oration(item.showChain)?'down-color':'up-color'">
         {{ item.showChain }}
         <img
           :src="handleImg(item.showChain)"
@@ -38,7 +38,7 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { handleImg } from "@/utils/common";
+import { handleImg,oration } from "@/utils/common";
 const props = defineProps(["BarComposeData", "cardItem"]);
 
 const constituteType = computed(() => {
@@ -85,13 +85,13 @@ const showConstituteTbCp = computed(() => {
   }
 }
 .constituteTbCp-data-icon {
-  width: 0.16rem;
+  width: .28rem;
   height: 0.24rem;
   margin-left: 0.12rem;
 }
 
 .constituteTbCp-data-title {
-  font-size: 13px;
+  font-size: .26rem;
   font-weight: 400;
   color: #696666;
 }

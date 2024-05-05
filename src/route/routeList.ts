@@ -1,8 +1,8 @@
 /*
  * @Description: 
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2022-12-12 10:20:56
- * @LastEditors: Bg
+ * @LastEditors: Bingo
  * @LastEditTime: 2023-05-11 15:20:44
  */
 import {RouteRecordRaw} from 'vue-router'

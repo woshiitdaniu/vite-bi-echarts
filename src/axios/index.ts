@@ -1,9 +1,9 @@
 /*
  * @Description:
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2022-12-12 10:56:39
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-26 16:09:23
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 16:00:08
  */
 import axios from "axios";
 import { showToast } from "@nutui/nutui";
@@ -13,11 +13,6 @@ const instance = axios.create({
   baseURL: AXIOS_DEFALUT_CONF.baseURL,
   timeout: AXIOS_DEFALUT_CONF.timeout,
   headers: { "X-Custom-Header": "foobar" },
-  // proxy: {
-  //     protocol: 'https',
-  //     host: '127.0.0.1',
-  //     port: 9000
-  //   },
 });
 // 添加请求拦截器
 instance.interceptors.request.use(
@@ -26,6 +21,9 @@ instance.interceptors.request.use(
     try {
       const token = JSON.parse(localStorage.getItem("tk") || "{}");
       // 只有非登录接口才需要拿token
+      // const token = {
+      //   jwt: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4aWViaW4xIiwiYXV0aCI6IlJPTEVfQURNSU4sUk9MRV9HQl9aQkpTIiwiZGVwdCI6IjMiLCJ1c2VyIjoyMTA4NCwiaXAiOiIxMC4xMjIuMy4xNTciLCJleHAiOjE3MTQ0NDI0OTJ9.OJUjsPr14fQwA_vR_NkRZDfM67GJX5BSBlV8jhxxm4TdhdlQw6BzWiqiQYk9XoM6TFflEdcGwJoqXHcjNoliZA"
+      // };
       if (
         token &&
         JSON.stringify(token) !== "{}" &&
@@ -40,7 +38,7 @@ instance.interceptors.request.use(
   },
   function (error) {
     // 对请求错误做些什么
-    alert("请求失败:" + error.message);
+    alert("请求失败:登录已过期");
     return Promise.reject(error);
   }
 );
@@ -66,7 +64,7 @@ instance.interceptors.response.use(
     } else {
       alert("请求失败:" + error.response.data.detail);
     }
-    
+
     return Promise.reject(error);
   }
 );

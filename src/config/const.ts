@@ -1,9 +1,9 @@
 /*
  * @Description:
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2024-04-25 10:37:26
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-25 17:14:48
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 09:18:00
  */
 export const OPTION_TYPE = {
   本月度: "M",
@@ -13,7 +13,7 @@ export const OPTION_TYPE = {
 
 // 部门
 export const PART_TYPE = {
-  集团: "020",
+  o集团: "020",
   多媒体产业: "2000",
   白色家电: "4000",
   "移动互联-电子": "7000",
@@ -23,15 +23,15 @@ export const PART_TYPE = {
   PCB产业: "8000",
   科技产业园: "1000",
   创投公司: "9000",
-  易平方: "0202",
-  华康创展: "0203",
+  or: "0202",
+  华o创展: "0203",
 };
 
 // 集团及下属子公司
 export const COMP_TYPE = {
-  深康佳: "0201",
-  华康创展: "0203",
-  易平方: "0202",
+  深o: "0201",
+  华o创展: "0203",
+  or: "0202",
 };
 
 // 各个指标对应的code name
@@ -44,7 +44,7 @@ export const TARGET_TYPE_ARR = [
   // 也叫利润总额
   {
     code: "150",
-    name: "考核利润",
+    name: "利润总额",
   },
   {
     code: "501",

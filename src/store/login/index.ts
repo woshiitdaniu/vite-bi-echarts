@@ -1,8 +1,8 @@
 /*
  * @Description:
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2022-12-12 11:19:55
- * @LastEditors: Bg
+ * @LastEditors: Bingo
  * @LastEditTime: 2024-04-22 17:34:10
  */
 import { defineStore } from "pinia";

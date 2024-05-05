@@ -1,9 +1,9 @@
 /*
  * @Description:
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2022-12-12 11:19:55
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-25 19:04:07
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 10:08:32
  */
 import { defineStore } from "pinia";
 import { PART_TYPE, COMP_TYPE, OPTION_TYPE } from "@/config/const";
@@ -19,24 +19,26 @@ export const useHomeConfig = defineStore("HomeConfig", {
       allOpen: number | null; //  1表示开启  2表示关闭
       currentPartInfo: inf_currentPartInfo;
       selectPartInfo: inf_selectPartInfo;
+      partList:Array<any>
     } = {
       // 一键控制全展开或收起
+      partList:[],// 当前Tk权限下的部门列表
       allOpen: null,
       // 当前部门
-      currentPartInfo: { name: "集团", code: PART_TYPE["集团"] },
+      currentPartInfo: { name: "o集团", code: PART_TYPE["o集团"] },
       // 选择的部门list
       selectPartInfo: {
         month: M,
         option: OPTION_TYPE["本月度"],
         optionName: "本月度",
-        organizationCode: PART_TYPE["集团"],
+        organizationCode: PART_TYPE["o集团"],
         year: new Date().getFullYear(),
         organizationCodes: [
-          COMP_TYPE["深康佳"],
-          COMP_TYPE["华康创展"],
-          COMP_TYPE["易平方"],
+          COMP_TYPE["深o"],
+          COMP_TYPE["华o创展"],
+          COMP_TYPE["or"],
         ],
-        organizationNames: ["深康佳", "华康创展", "易平方"],
+        organizationNames: ["深o", "华o创展", "or"],
         unit: "亿",
       },
     };
@@ -57,6 +59,10 @@ export const useHomeConfig = defineStore("HomeConfig", {
     // 更新展开
     updateAllOpen(newVal: boolean) {
       this.allOpen = newVal;
+    },
+    // 更新部门列表
+    updatePartList(newVal: Array<any>) {
+      this.partList = newVal;
     },
   },
 });

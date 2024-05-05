@@ -1,8 +1,8 @@
 <!--
  * @Description: echarts 折线
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bg
+ * @LastEditors: Bingo
  * @LastEditTime: 2024-04-26 16:08:00
 -->
 <template>

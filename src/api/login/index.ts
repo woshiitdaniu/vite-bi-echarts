@@ -1,8 +1,8 @@
 /*
  * @Description: 
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2022-12-12 11:09:17
- * @LastEditors: Bg
+ * @LastEditors: Bingo
  * @LastEditTime: 2023-09-01 11:31:24
  */
 import axios from '@/axios'
@@ -13,3 +13,5 @@ export const toLogin=()=>{
         url:'/organization/api/authenticate',
     })
 }
+
+

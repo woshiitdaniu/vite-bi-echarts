@@ -1,8 +1,8 @@
 <!--
  * @Description: 月度 季度 年度 同比数据
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bg
+ * @LastEditors: Bingo
  * @LastEditTime: 2024-04-25 18:46:19
 -->
 <template>

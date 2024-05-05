@@ -1,42 +1,63 @@
 <!--
  * @Description: 
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2023-05-11 09:44:13
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-28 10:12:10
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 16:04:46
 -->
 <template>
   <div style="width: 100vw" class="home-box">
     <LogoLoading v-show="loadData"></LogoLoading>
-    <!-- 顶部吸顶内容 -->
-    <nut-sticky>
-      <div class="home-top-sticky">
-        <!-- title -->
-        <Title :title="topTitle"></Title>
-        <!-- 已选信息组件 -->
-        <TopInfoCp @openFilterOverlay="openFilterOverlay"></TopInfoCp>
-        <!-- 筛选组件 -->
-        <FilterMdCp
-          :showOverlay="showOverlay"
-          @closeFilterMd="closeFilterMd"
-        ></FilterMdCp>
+    <div v-if="!loadData">
+      <!-- 顶部吸顶内容 -->
+      <nut-sticky>
+        <div class="home-top-sticky">
+          <!-- title -->
+          <Title :title="topTitle"></Title>
+          <!-- 已选信息组件 -->
+          <TopInfoCp @openFilterOverlay="openFilterOverlay"></TopInfoCp>
+          <!-- 筛选组件 -->
+          <FilterMdCp
+            :showOverlay="showOverlay"
+            @closeFilterMd="closeFilterMd"
+          ></FilterMdCp>
+        </div>
+      </nut-sticky>
+      <div class="data-content-box">
+        <!-- 收入card -->
+        <CardCp
+          v-for="cardItem in cardListData"
+          :key="cardItem.code"
+          :cardItem="cardItem"
+        ></CardCp>
       </div>
-    </nut-sticky>
-    <div class="data-content-box">
-      <!-- 收入card -->
-      <CardCp
-        v-for="cardItem in cardListData"
-        :key="cardItem.code"
-        :cardItem="cardItem"
-      ></CardCp>
+      <nut-backtop :bottom="90"></nut-backtop>
+      <div class="btn-box">
+        <div class="btn-item" id="tour5-2" @click="handleOpen(1)">全部展开</div>
+        <div class="btn-item" id="tour5-3" @click="handleOpen(2)">全部收起</div>
+        <div class="btn-item" id="tour5-4" @click="handleFontSize(1)">
+          字体放大
+        </div>
+        <div class="btn-item" id="tour5-5" @click="handleFontSize(2)">
+          字体缩小
+        </div>
+      </div>
     </div>
-    <nut-backtop :bottom="90"></nut-backtop>
-    <div class="btn-box">
-      <div class="btn-item" @click="handleOpen(1)">全部展开</div>
-      <div class="btn-item" @click="handleOpen(2)">全部收起</div>
-      <div class="btn-item" @click="handleFontSize(1)">字体放大</div>
-      <div class="btn-item" @click="handleFontSize(2)">字体缩小</div>
-    </div>
+    <nut-watermark :z-index="999" content="经营数据,注意保密!"></nut-watermark>
+
+    <!-- 引导 -->
+    <nut-tour
+      v-model="tourShow"
+      class="nut-custom-tour"
+      :steps="steps"
+      location="top-start"
+      :offset="[0, 0]"
+      :mask-width="60"
+      :mask-height="50"
+      complete-txt="我知道了"
+      @close="handleTourFinsh"
+    >
+    </nut-tour>
   </div>
 </template>
 <script lang="ts" setup>
@@ -50,7 +71,12 @@ import FilterMdCp from "@/view/home/components/filterMdCp/index.vue";
 import CardCp from "@/view/home/components/cardCp/index.vue";
 
 import { inf_selectPartInfo } from "@/store/home/home";
-import { PART_TYPE, TARGET_TYPE, TARGET_TYPE_ARR } from "@/config/const";
+import {
+  PART_TYPE,
+  PART_TYPE_ARR,
+  TARGET_TYPE,
+  TARGET_TYPE_ARR,
+} from "@/config/const";
 // 接口引入
 import {
   apiLinearData,
@@ -61,6 +87,9 @@ import {
   apiGetCardDataUnit,
   getLinearDataUnit,
 } from "@/api/home";
+import { getMenuByRight } from "@/api";
+import { updataCurrentAndSelectPartInfoHook } from "./components/partSelectCp/partSelectHook";
+import { TourShowHook } from "./hooks/tourShowHook";
 
 // 接口定义
 interface inf_allCardDataItem {
@@ -73,17 +102,18 @@ interface inf_allCardDataItem {
   BarEchartsData?: object; // 柱状图
   BarComposeData?: object;
 }
-
+// 引导步骤条 hooks
+const { tourShow, steps, handleTourFinsh } = TourShowHook();
 // 获取仓库实例
 const store = useHomeConfig();
 
 const showOverlay = ref(false);
-const loadData = ref(false);
+const loadData = ref(true);
 const cardListData = ref<Array<inf_allCardDataItem>>([]);
 
 // 计算值
 let topTitle: any = computed(() => {
-  return store.currentPartInfo.name || "集团";
+  return store.currentPartInfo.name || "康佳集团";
 });
 
 // 打开筛选弹框
@@ -283,13 +313,12 @@ const handleComposeData = (
     );
 
     let afterBarLineEchartsData: any = null;
-    if (topTitle.value == "集团") {
+    if (topTitle.value == "康佳集团") {
       // 组装 柱状图 数据
       afterBarLineEchartsData = handleBarLineEchartsData(
         afterBarComposeData,
         BarLineEchartsData
       );
-      console.log("afterBarLineEchartsData", afterBarLineEchartsData);
       cardListData.value = afterBarLineEchartsData;
     } else {
       cardListData.value = afterBarComposeData;
@@ -304,7 +333,7 @@ const handleParams = (data: any) => {
   let params = JSON.parse(JSON.stringify(data));
   delete params.organizationNames;
   delete params.optionName;
-  if (params.organizationCode !== PART_TYPE["集团"]) {
+  if (params.organizationCode !== PART_TYPE["康佳集团"]) {
     delete params.organizationCodes;
   }
   return params;
@@ -346,7 +375,7 @@ const initData = async (data: inf_selectPartInfo) => {
   loadData.value = true;
   try {
     let params = handleParams(data);
-    if (params.organizationCode == PART_TYPE["集团"]) {
+    if (params.organizationCode == PART_TYPE["康佳集团"]) {
       handleInitDataV1(params);
     } else {
       handleInitDataUnit(params);
@@ -361,7 +390,7 @@ const initData = async (data: inf_selectPartInfo) => {
 const handleFontSize = (type: number) => {
   // 边界值设置
   let max_size = 60;
-  let min_size = 40;
+  let min_size = 45;
   let step = 5;
   // 获取当前字体大小
 
@@ -379,6 +408,7 @@ const handleFontSize = (type: number) => {
       htmlFontSize -= step;
     }
   }
+  // console.log('htmlFontSize',htmlFontSize)
   // 重新赋值
   domNode.style.fontSize = htmlFontSize + "px";
 };
@@ -386,6 +416,32 @@ const handleFontSize = (type: number) => {
 // 一键收起所有的card
 const handleOpen = (type: number) => {
   store.updateAllOpen(type);
+};
+// 一键收起所有的card
+const handlePartsList = (res: any) => {
+  // 数据格式化  过滤数组
+  let partCodeList = Object.keys(res);
+  let partsList = PART_TYPE_ARR.filter((item: any) => {
+    return partCodeList.includes(item.label);
+  });
+  store.updatePartList(partsList);
+  return partsList;
+};
+
+// 根据用户tk获取对应的部门列表 并取第一个值作为当前默认部门
+const handleGetMenuByRight = async () => {
+  try {
+    let res: any = await getMenuByRight({});
+    // 更新当前部门列表
+    let partList = handlePartsList(res.data);
+    if (partList.length > 0) {
+      // 更新当前部门信息
+      updataCurrentAndSelectPartInfoHook({
+        label: partList[0].label,
+        value: partList[0].value,
+      });
+    }
+  } catch (e) {}
 };
 // 监听筛选条件变化 变化就重新获取数据
 watch(
@@ -397,7 +453,8 @@ watch(
 );
 // 初始化
 onMounted(() => {
-  initData(store.selectPartInfo);
+  handleGetMenuByRight();
+  // initData(store.selectPartInfo);
 });
 </script>
 <style scoped lang="less">
@@ -420,12 +477,22 @@ onMounted(() => {
   font-size: 0.32rem;
   justify-content: space-around;
   align-items: center;
+  border-top: 0.02rem solid #c2c2c278;
   .btn-item {
-    background: #3c8bfe;
-    color: white;
+    background: white;
+    color: #3c8bfe;
     flex: 1;
     text-align: center;
     line-height: 0.96rem;
+    font-weight: bold;
   }
 }
+</style>
+<style lang="less">
+  .nut-tour-content-inner{
+    font-size: .34rem;
+  }
+  .nut-tour-content-bottom-operate-btn{
+    font-size: 0.32rem;
+  }
 </style>

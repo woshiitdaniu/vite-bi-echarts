@@ -1,13 +1,13 @@
 /*
  * @Description:
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2022-12-12 09:48:36
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-23 17:19:18
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 14:55:58
  */
 import { createApp } from "vue";
 import { createPinia } from 'pinia'
-import { Popup,Cell,Dialog,Sticky ,PullRefresh,Backtop,Toast,Collapse, CollapseItem,Tour,Popover,Radio, RadioGroup,DatePicker,Checkbox, CheckboxGroup,Overlay       } from '@nutui/nutui';
+import { Watermark,Popup,Cell,Dialog,Sticky ,PullRefresh,Backtop,Toast,Collapse, CollapseItem,Tour,Popover,Radio, RadioGroup,DatePicker,Checkbox, CheckboxGroup,Overlay       } from '@nutui/nutui';
 import "@nutui/nutui/dist/style.css";
 import "./style.less";
 import './utils/rem'
@@ -46,4 +46,5 @@ app.use(Dialog)
 app.use(Overlay)
 app.use(Cell)
 app.use(Popup)
+app.use(Watermark)
 app.mount("#app");

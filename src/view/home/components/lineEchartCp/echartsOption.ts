@@ -1,5 +1,67 @@
 import { UphEcharts } from "./type";
 import * as echarts from "echarts";
+
+const com_option = {
+  // 滑块配置
+  slider: {
+    type: "slider", //slider表示有滑动块的，inside表示内置的
+    show: true,
+    height: 12,
+    xAxisIndex: 0,
+    bottom: 10,
+    start: 60,
+    end: 100, // 这个可以控制显示的范围
+    minSpan: 8, //最小滑动距离
+    zoomLock: true, // 设置 zoomLock 属性为 true 防止用户滑动滚动长度变化
+  },
+  // 悬浮提示框设置
+  tooltip: {
+    trigger: "axis",
+    extraCssText: "z-index: 55 !important;",
+    axisPointer: {
+      type: "cross",
+      crossStyle: {
+        color: "#999",
+      },
+    },
+    // 格式化弹窗显示文字
+    formatter(params: any) {
+      var relVal = params[0].name;
+      for (var i = 0, l = params.length; i < l; i++) {
+        let rateVal = { rate: "亿", val: params[i].value };
+        relVal +=
+          "<br/>" +
+          params[i].marker +
+          params[i].seriesName +
+          " : <div style='font-weight:bold;'>" +
+          rateVal.val +
+          `</div>  ${
+            params[i].seriesName.indexOf("率") > -1 ? "%" : rateVal.rate
+          }`;
+      }
+      return relVal;
+    },
+  },
+  // 调整xy轴与容器上下左右边距
+  grid: {
+    left: "2%",
+    right: "0%",
+    bottom: "0%",
+    top: "15%",
+    containLabel: true,
+  },
+  noData: {
+    text: "暂无数据",
+    x: "center",
+    y: "center",
+    textStyle: {
+      fontSize: 14,
+      fontWeight: "normal",
+      color: "#888",
+    },
+  },
+};
+
 // 各种趋势图 折线
 const getLineChartOptions = (data: UphEcharts) => {
   let dataLen = 0;
@@ -9,55 +71,11 @@ const getLineChartOptions = (data: UphEcharts) => {
     dataLen = data?.xAxisData.length;
   }
   let option: any = {
-    dataZoom:
-      dataLen > 7
-        ? [
-            {
-              type: "slider", //slider表示有滑动块的，inside表示内置的
-              show: true,
-              height: 12,
-              xAxisIndex: 0,
-              bottom: 10,
-              start: 60,
-              end: 100, // 这个可以控制显示的范围
-              minSpan: 8, //最小滑动距离
-              zoomLock: true, // 设置 zoomLock 属性为 true 防止用户滑动滚动长度变化
-            },
-          ]
-        : null,
+    dataZoom: dataLen > 7 ? [com_option.slider] : null,
     // 悬浮提示框设置
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "cross",
-        crossStyle: {
-          color: "#999",
-        },
-      },
-      // 格式化弹窗显示文字
-      formatter(params: any) {
-        var relVal = params[0].name;
-        for (var i = 0, l = params.length; i < l; i++) {
-          let rateVal = { rate: "亿", val: params[i].value };
-          relVal +=
-            "<br/>" +
-            params[i].marker +
-            params[i].seriesName +
-            " : " +
-            rateVal.val +
-            `  ${params[i].seriesName.indexOf("率") > -1 ? "%" : rateVal.rate}`;
-        }
-        return relVal;
-      },
-    },
+    tooltip: com_option.tooltip,
     // 调整xy轴与容器上下左右边距
-    grid: {
-      left: "2%",
-      right: "0%",
-      bottom: "0%",
-      top: "15%",
-      containLabel: true,
-    },
+    grid: com_option.grid,
     legend: {
       data: data.legendData || [],
     },
@@ -113,7 +131,7 @@ const getLineChartOptions = (data: UphEcharts) => {
         name: data.legendData[1],
         type: "line",
         smooth: true,
-        data: data?.seriesData[1]?.data || data?.seriesData[0]?.basisData|| [],
+        data: data?.seriesData[1]?.data || data?.seriesData[0]?.basisData || [],
         // 设置单个柱状的样式
         itemStyle: {
           color: "#367FF9",
@@ -122,16 +140,7 @@ const getLineChartOptions = (data: UphEcharts) => {
     ],
   };
   if (dataLen == 0) {
-    option["title"] = {
-      text: "暂无数据",
-      x: "center",
-      y: "center",
-      textStyle: {
-        fontSize: 14,
-        fontWeight: "normal",
-        color: "#888",
-      },
-    };
+    option["title"] = com_option.noData;
   }
   return option;
 };
@@ -145,55 +154,11 @@ const getBarLineChartOptions = (data: UphEcharts) => {
     dataLen = data?.xAxisData.length;
   }
   let option: any = {
-    dataZoom:
-      dataLen > 7
-        ? [
-            {
-              type: "slider", //slider表示有滑动块的，inside表示内置的
-              show: true,
-              height: 12,
-              xAxisIndex: 0,
-              bottom: 10,
-              start: 60,
-              end: 100, // 这个可以控制显示的范围
-              minSpan: 8, //最小滑动距离
-              zoomLock: true, // 设置 zoomLock 属性为 true 防止用户滑动滚动长度变化
-            },
-          ]
-        : null,
+    dataZoom: dataLen > 7 ? [com_option.slider] : null,
     // 悬浮提示框设置
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "cross",
-        crossStyle: {
-          color: "#999",
-        },
-      },
-      // 格式化弹窗显示文字
-      formatter(params: any) {
-        var relVal = params[0].name;
-        for (var i = 0, l = params.length; i < l; i++) {
-          let rateVal = { rate: "亿", val: params[i].value };
-          relVal +=
-            "<br/>" +
-            params[i].marker +
-            params[i].seriesName +
-            " : " +
-            rateVal.val +
-            `  ${params[i].seriesName.indexOf("率") > -1 ? "%" : rateVal.rate}`;
-        }
-        return relVal;
-      },
-    },
+    tooltip: com_option.tooltip,
     // 调整xy轴与容器上下左右边距
-    grid: {
-      left: "2%",
-      right: "0%",
-      bottom: "0%",
-      top: "35%",
-      containLabel: true,
-    },
+    grid: com_option.grid,
     legend: {
       data: data.legendData || [],
     },
@@ -328,16 +293,7 @@ const getBarLineChartOptions = (data: UphEcharts) => {
     ],
   };
   if (dataLen == 0) {
-    option["title"] = {
-      text: "暂无数据",
-      x: "center",
-      y: "center",
-      textStyle: {
-        fontSize: 14,
-        fontWeight: "normal",
-        color: "#888",
-      },
-    };
+    option["title"] = com_option.noData;
   }
   return option;
 };
@@ -349,55 +305,11 @@ const getBarChartsOptions = (data: UphEcharts) => {
     dataLen = data?.xAxisData.length;
   }
   let option: any = {
-    dataZoom:
-      dataLen > 7
-        ? [
-            {
-              type: "slider", //slider表示有滑动块的，inside表示内置的
-              show: true,
-              height: 12,
-              xAxisIndex: 0,
-              bottom: 10,
-              start: 60,
-              end: 100, // 这个可以控制显示的范围
-              minSpan: 8, //最小滑动距离
-              zoomLock: true, // 设置 zoomLock 属性为 true 防止用户滑动滚动长度变化
-            },
-          ]
-        : null,
+    dataZoom: dataLen > 7 ? [com_option.slider] : null,
     // 悬浮提示框设置
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "cross",
-        crossStyle: {
-          color: "#999",
-        },
-      },
-      // 格式化弹窗显示文字
-      formatter(params: any) {
-        var relVal = params[0].name;
-        for (var i = 0, l = params.length; i < l; i++) {
-          let rateVal = { rate: "亿", val: params[i].value };
-          relVal +=
-            "<br/>" +
-            params[i].marker +
-            params[i].seriesName +
-            " : " +
-            rateVal.val +
-            `  ${params[i].seriesName.indexOf("率") > -1 ? "%" : rateVal.rate}`;
-        }
-        return relVal;
-      },
-    },
+    tooltip: com_option.tooltip,
     // 调整xy轴与容器上下左右边距
-    grid: {
-      left: "2%",
-      right: "0%",
-      bottom: "0%",
-      top: "35%",
-      containLabel: true,
-    },
+    grid: com_option.grid,
     legend: {
       data: data.legendData || [],
     },
@@ -496,18 +408,9 @@ const getBarChartsOptions = (data: UphEcharts) => {
     ],
   };
   if (dataLen == 0) {
-    option["title"] = {
-      text: "暂无数据",
-      x: "center",
-      y: "center",
-      textStyle: {
-        fontSize: 14,
-        fontWeight: "normal",
-        color: "#888",
-      },
-    };
+    option["title"] = com_option.noData;
   }
   return option;
 };
 
-export { getLineChartOptions, getBarLineChartOptions,getBarChartsOptions };
+export { getLineChartOptions, getBarLineChartOptions, getBarChartsOptions };

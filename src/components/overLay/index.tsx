@@ -1,8 +1,8 @@
 /*
  * @Description: 
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2022-12-13 16:34:51
- * @LastEditors: Bg
+ * @LastEditors: Bingo
  * @LastEditTime: 2022-12-13 17:35:17
  */
 import {defineComponent}from 'vue'

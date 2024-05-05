@@ -1,9 +1,9 @@
 <!--
  * @Description: 顶部吸顶的简易信息栏
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-26 15:26:28
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 15:05:11
 -->
 <template>
   <div class="topInfoCp-box">
@@ -12,7 +12,7 @@
       <span class="topInfoCp-item topInfoCp-item-time">{{ time }}</span>
       <span class="topInfoCp-item topInfoCp-item-radio">{{ optionName }}</span>
     </aside>
-    <aside class="topInfoCp-right" @click="openFilterOverlay">筛选</aside>
+    <aside class="topInfoCp-right" @click="openFilterOverlay" id="tour5-1">筛选</aside>
   </div>
 </template>
 <script lang="ts" setup>
@@ -33,7 +33,7 @@ let time = computed(
 let optionName = computed(() => store.selectPartInfo.value.optionName);
 
 const isShowParts = computed(
-  () => store.currentPartInfo.value.code == PART_TYPE["集团"]
+  () => store.currentPartInfo.value.code == PART_TYPE["o集团"]
 );
 
 const emit = defineEmits(["openFilterOverlay"]);
@@ -48,8 +48,10 @@ const openFilterOverlay = () => {
   display: flex;
   justify-content: space-around;
   font-size: 0.3rem;
-  border-bottom: 0.02rem solid @var-border-color;
-  padding: 0 0.16rem 0.16rem;
+  border-bottom: 0.02rem solid #c2c2c278;
+  height: 0.6rem;
+  padding: 0.16rem 0.16rem;
+  align-items: center;
   .topInfoCp-left {
     flex: 1;
   }
@@ -61,6 +63,7 @@ const openFilterOverlay = () => {
   }
   .topInfoCp-right {
     color: @var-color;
+    padding: 0.2rem;
   }
 }
 </style>

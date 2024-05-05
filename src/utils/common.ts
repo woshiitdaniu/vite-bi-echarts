@@ -1,7 +1,12 @@
 import upImg from "@/assets/up.png";
 import downImg from "@/assets/down.png";
+
+export const oration = (rate: any) => {
+  return (rate || "").indexOf("-") > -1 ;
+};
+
 export const handleImg = (rate: any) => {
-  return (rate || "").indexOf("-") > -1 ? downImg : upImg;
+  return oration(rate) ? downImg : upImg;
 };
 
 export const getCurrentTime = () => {

@@ -1,8 +1,8 @@
 <!--
  * @Description: 内容卡片  包括title 总体数据  折线图 收入构成表格等
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bg
+ * @LastEditors: Bingo
  * @LastEditTime: 2024-04-26 10:48:36
 -->
 <template>
@@ -79,10 +79,10 @@ const handleShowCard = () => {
 }
 .cardCp-close {
   transition: all 0.5s;
-  height: 40px;
+  height: .8rem;
 }
 .cardCp-header {
-  padding: 10px 5px;
+  padding: .2rem .1rem;
   border-bottom: 0.02rem solid @var-border-color;
   font-size: 0.3rem;
   color: #333;

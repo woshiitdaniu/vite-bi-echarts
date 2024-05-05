@@ -1,9 +1,9 @@
 <!--
  * @Description: 筛选条件 自顶往下滑出的自定义弹框
- * @Autor: Bg
+ * @Autor: Bingo
  * @Date: 2023-01-11 15:01:26
- * @LastEditors: Bg
- * @LastEditTime: 2024-04-26 15:19:13
+ * @LastEditors: Bingo
+ * @LastEditTime: 2024-04-29 10:53:35
 -->
 <template>
   <div class="filterMdCp-box">
@@ -86,7 +86,7 @@ const store = storeToRefs(useHomeStore);
 let selectPartInfo: inf_selectPartInfo = store.selectPartInfo.value;
 let currentPartInfo: inf_currentPartInfo = store.currentPartInfo.value;
 let showPartSelect = computed(() => {
-  return store.currentPartInfo.value.code == PART_TYPE["集团"];
+  return store.currentPartInfo.value.code == PART_TYPE["o集团"];
 });
 
 const showPopup = ref(false);
@@ -107,9 +107,6 @@ const checkboxList = ref(COMP_TYPE_ARR);
 const organizationCodes = ref(selectPartInfo.organizationCodes);
 const organizationNames = ref(selectPartInfo.organizationNames);
 
-const confirm = (selectedValue: any) => {
-  console.log(selectedValue);
-};
 // 选择部分
 const handleCheckItem = (checkItem: { label: string; value: string }) => {
   if (organizationCodes.value.includes(checkItem.label)) {
@@ -188,11 +185,11 @@ const handleConfirm = () => {
         optionName: "本月度",
         year: new Date().getFullYear(),
         organizationCodes: [
-          COMP_TYPE["深康佳"],
-          COMP_TYPE["华康创展"],
-          COMP_TYPE["易平方"],
+          COMP_TYPE["深o"],
+          COMP_TYPE["华o创展"],
+          COMP_TYPE["or"],
         ],
-        organizationNames: ["深康佳", "华康创展", "易平方"],
+        organizationNames: ["深o", "华o创展", "or"],
   
   */
   console.log("data", data);

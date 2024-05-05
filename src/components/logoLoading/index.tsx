@@ -7,7 +7,7 @@ export default defineComponent({
     return () => {
       return (
         <view class="comp-loading">
-          <view class="slide-shine">'A'</view>
+          <view class="slide-shine">o</view>
         </view>
       );
     };
